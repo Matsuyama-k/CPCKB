@@ -7,35 +7,40 @@
     combos {
         compatible = "zmk,combos";
         
-        // 秘技 1：同時短路 D0 同 D1 -> 切換 Mac / Windows 模式
+        // 秘技 1：D0 + D1 -> 切換 Mac / Windows
         combo_os_toggle {
             timeout-ms = <50>;
             key-positions = <0 1>; 
             bindings = <&tog 1>; 
         };
 
-        // 秘技 2：同時短路 D1 同 D2 -> 清除當前藍牙配對紀錄 (重置藍牙)
+        // 秘技 2：D1 + D2 -> 清除藍牙配對紀錄
         combo_bt_clear {
             timeout-ms = <50>;
             key-positions = <1 2>;
             bindings = <&bt BT_CLR>;
+        };
+
+        // 🌟【新秘技 3】：D0 + D2 -> 強制切換 藍牙 / USB 模式
+        combo_out_toggle {
+            timeout-ms = <50>;
+            key-positions = <0 2>;
+            bindings = <&out OUT_TOG>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Windows 模式 (預設)
         win_layer {
             bindings = <
-                &kp LC(C)    &kp LC(V)    &kp LA(TAB)  // D0: Ctrl+C | D1: Ctrl+V | D2: Alt+Tab
+                &kp LC(C)    &kp LC(V)    &kp LA(TAB)
             >;
         };
 
-        // Layer 1: Mac 模式
         mac_layer {
             bindings = <
-                &kp LG(C)    &kp LG(V)    &kp LG(TAB)  // D0: Cmd+C | D1: Cmd+V | D2: Cmd+Tab
+                &kp LG(C)    &kp LG(V)    &kp LG(TAB)
             >;
         };
     };
