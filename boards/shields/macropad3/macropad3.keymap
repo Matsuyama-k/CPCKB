@@ -4,43 +4,14 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
-    combos {
-        compatible = "zmk,combos";
-        
-        // 秘技 1：D0 + D1 -> 切換 Mac / Windows
-        combo_os_toggle {
-            timeout-ms = <50>;
-            key-positions = <0 1>; 
-            bindings = <&tog 1>; 
-        };
-
-        // 秘技 2：D1 + D2 -> 清除藍牙配對紀錄
-        combo_bt_clear {
-            timeout-ms = <50>;
-            key-positions = <1 2>;
-            bindings = <&bt BT_CLR>;
-        };
-
-        // 🌟【新秘技 3】：D0 + D2 -> 強制切換 藍牙 / USB 模式
-        combo_out_toggle {
-            timeout-ms = <50>;
-            key-positions = <0 2>;
-            bindings = <&out OUT_TOG>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
-        win_layer {
+        default_layer {
             bindings = <
-                &kp LC(C)    &kp LC(V)    &kp LA(TAB)
-            >;
-        };
-
-        mac_layer {
-            bindings = <
-                &kp LG(C)    &kp LG(V)    &kp LG(TAB)
+                &out OUT_TOG    // D0 孔：單篤一下，即刻【強制切換 USB / 藍牙】！
+                &bt BT_CLR      // D1 孔：單篤一下，即刻【清除舊藍牙記憶】！
+                &kp N1          // D2 孔：單篤一下，打出 1 (測試晶片有冇死機)
             >;
         };
     };
