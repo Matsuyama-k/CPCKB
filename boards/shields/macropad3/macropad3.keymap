@@ -9,9 +9,9 @@
 
         default_layer {
             bindings = <
-                &out OUT_TOG    // D0 孔：單篤一下，即刻【強制切換 USB / 藍牙】！
-                &bt BT_CLR      // D1 孔：單篤一下，即刻【清除舊藍牙記憶】！
-                &kp N1          // D2 孔：單篤一下，打出 1 (測試晶片有冇死機)
+                &out OUT_TOG       // D0 孔：切換 USB / 藍牙模式
+                &bt BT_CLR_ALL     // D1 孔：【終極清空】刪除所有藍牙頻道嘅配對紀錄！
+                &kp N1             // D2 孔：打出 1 (測試鍵盤反應)
             >;
         };
     };
