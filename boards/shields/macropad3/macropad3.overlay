@@ -1,0 +1,17 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+    };
+
+    kscan0: kscan_0 {
+        compatible = "zmk,kscan-gpio-direct";
+        label = "KSCAN";
+        input-gpios
+            = <&pro_micro 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // 複製
+            , <&pro_micro 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // 貼上
+            , <&pro_micro 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // 切換視窗
+            ;
+    };
+};
