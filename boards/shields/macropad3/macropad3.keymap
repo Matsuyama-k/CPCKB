@@ -2,30 +2,13 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
-    combos {
-        compatible = "zmk,combos";
-        // 雙系統切換：同時按複製(0)和貼上(1)，切換 Mac 模式
-        combo_os_toggle {
-            timeout-ms = <50>;
-            key-positions = <0 1>; 
-            bindings = <&tog 1>; 
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
-        win_layer {
+        default_layer {
             bindings = <
-                &kp LC(C)    &kp LC(V)    // 左上：Ctrl+C, 右上：Ctrl+V
-                &kp LA(TAB)               // 右下：Alt+Tab
-            >;
-        };
-
-        mac_layer {
-            bindings = <
-                &kp LG(C)    &kp LG(V)    // 左上：Cmd+C, 右上：Cmd+V
-                &kp LG(TAB)               // 右下：Cmd+Tab
+                &kp N1    &kp N2    // 017孔輸出 1, 020孔輸出 2
+                &kp N3              // 022孔輸出 3
             >;
         };
     };
