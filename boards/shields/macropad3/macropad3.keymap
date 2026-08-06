@@ -1,14 +1,41 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 
 / {
+    combos {
+        compatible = "zmk,combos";
+        
+        // 秘技 1：同時短路 D0 同 D1 -> 切換 Mac / Windows 模式
+        combo_os_toggle {
+            timeout-ms = <50>;
+            key-positions = <0 1>; 
+            bindings = <&tog 1>; 
+        };
+
+        // 秘技 2：同時短路 D1 同 D2 -> 清除當前藍牙配對紀錄 (重置藍牙)
+        combo_bt_clear {
+            timeout-ms = <50>;
+            key-positions = <1 2>;
+            bindings = <&bt BT_CLR>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        // Layer 0: Windows 模式 (預設)
+        win_layer {
             bindings = <
-                &kp N1    &kp N2    // 017孔輸出 1, 020孔輸出 2
-                &kp N3              // 022孔輸出 3
+                &kp LC(C)    &kp LC(V)    &kp LA(TAB)  // D0: Ctrl+C | D1: Ctrl+V | D2: Alt+Tab
+            >;
+        };
+
+        // Layer 1: Mac 模式
+        mac_layer {
+            bindings = <
+                &kp LG(C)    &kp LG(V)    &kp LG(TAB)  // D0: Cmd+C | D1: Cmd+V | D2: Cmd+Tab
             >;
         };
     };
