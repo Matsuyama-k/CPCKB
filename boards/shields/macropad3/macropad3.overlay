@@ -4,6 +4,14 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
+        zmk,backlight = &backlight; // 綁定背光系統
+    };
+
+    // 💡 綁定 XIAO 板上的 026 號紅色 LED 孔
+    backlight: backlight {
+        compatible = "gpio-backlight";
+        label = "Onboard RED LED";
+        gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
     };
 
     default_transform: keymap_transform_0 {
@@ -19,9 +27,9 @@
         compatible = "zmk,kscan-gpio-direct";
         label = "KSCAN";
         input-gpios
-            = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // 對應 XIAO 板上 D0 孔
-            , <&xiao_d 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // 對應 XIAO 板上 D1 孔
-            , <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // 對應 XIAO 板上 D2 孔
+            = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
             ;
     };
 };
