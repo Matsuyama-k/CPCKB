@@ -1,44 +1,17 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 
 / {
-    combos {
-        compatible = "zmk,combos";
-        
-        // 🌟【雙系統切換秘技】：同時按/短路 D0 + D1 -> 切換 Windows / Mac 模式
-        combo_tog_mac {
-            timeout-ms = <50>;
-            key-positions = <0 1>;
-            bindings = <&tog 1>;
-        };
-
-        // 🌟【藍牙重置秘技】：同時按/短路 D1 + D2 -> 清除所有藍牙紀錄
-        combo_bt_clear {
-            timeout-ms = <50>;
-            key-positions = <1 2>;
-            bindings = <&bt BT_CLR_ALL>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Windows 模式 (開機預設)
-        win_layer {
+        default_layer {
             bindings = <
-                &kp LC(C)    // D0 孔：Ctrl + C (複製)
-                &kp LC(V)    // D1 孔：Ctrl + V (貼上)
-                &kp LA(TAB)  // D2 孔：Alt + Tab (切換視窗)
-            >;
-        };
-
-        // Layer 1: Mac 模式
-        mac_layer {
-            bindings = <
-                &kp LG(C)    // D0 孔：Command + C (複製)
-                &kp LG(V)    // D1 孔：Command + V (貼上)
-                &kp LG(TAB)  // D2 孔：Command + Tab (切換視窗)
+                &bt BT_CLR_ALL  // D0 孔：單篤一下，即刻【徹底清空板上所有舊藍牙記憶】
+                &out OUT_TOG    // D1 孔：單篤一下，強制【切換 USB / 藍牙 輸出模式】
+                &kp N1          // D2 孔：單篤一下，打出 1 (測試連線)
             >;
         };
     };
