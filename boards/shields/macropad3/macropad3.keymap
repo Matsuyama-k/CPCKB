@@ -6,7 +6,7 @@
 
 / {
     behaviors {
-        // 💡 閃燈巨集：按下按鍵時開燈 50ms，隨後關燈並輸出按鍵
+        // 觸發巨集：按鍵時開燈 50ms 閃爍，隨後發送按鍵訊號並關燈
         kp_led: kp_led {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
@@ -23,21 +23,21 @@
     combos {
         compatible = "zmk,combos";
         
-        // 🌟【秘技 1】：同時按 D0 + D1 -> 切換 Windows / Mac 模式
+        // 組合鍵 1：同時按 D0 + D1 -> 切換 Windows / Mac 模式
         combo_tog_mac {
             timeout-ms = <100>;
             key-positions = <0 1>;
             bindings = <&tog 1>;
         };
 
-        // 🌟【備用秘技 2】：同時按 D1 + D2 -> 萬一換電腦，一秒【清空藍牙記憶】
+        // 組合鍵 2：同時按 D1 + D2 -> 清空藍牙配對紀錄
         combo_bt_clear {
             timeout-ms = <100>;
             key-positions = <1 2>;
             bindings = <&bt BT_CLR_ALL>;
         };
 
-        // 🌟【備用秘技 3】：同時按 D0 + D2 -> 強制切換【USB / 藍牙 模式】
+        // 組合鍵 3：同時按 D0 + D2 -> 切換 USB / 藍牙 輸出模式
         combo_out_toggle {
             timeout-ms = <100>;
             key-positions = <0 2>;
@@ -51,18 +51,18 @@
         // Layer 0: Windows 模式 (預設)
         win_layer {
             bindings = <
-                &kp_led LC(C)    // D0: Ctrl + C (按落閃紅燈)
-                &kp_led LC(V)    // D1: Ctrl + V (按落閃紅燈)
-                &kp_led LA(TAB)  // D2: Alt + Tab (按落閃紅燈)
+                &kp_led LC(C)    // D0: Ctrl + C
+                &kp_led LC(V)    // D1: Ctrl + V
+                &kp_led LA(TAB)  // D2: Alt + Tab
             >;
         };
 
         // Layer 1: Mac 模式
         mac_layer {
             bindings = <
-                &kp_led LG(C)    // D0: Cmd + C (按落閃紅燈)
-                &kp_led LG(V)    // D1: Cmd + V (按落閃紅燈)
-                &kp_led LG(TAB)  // D2: Cmd + Tab (按落閃紅燈)
+                &kp_led LG(C)    // D0: Cmd + C
+                &kp_led LG(V)    // D1: Cmd + V
+                &kp_led LG(TAB)  // D2: Cmd + Tab
             >;
         };
     };
