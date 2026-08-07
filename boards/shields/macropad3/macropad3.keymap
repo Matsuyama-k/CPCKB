@@ -6,12 +6,12 @@
 
 / {
     behaviors {
-        // 💡 靈魂巨集：按鍵時開燈 50ms 閃爍，然後關燈
+        // 💡 閃燈巨集：按下按鍵時開燈 50ms，隨後關燈並輸出按鍵
         kp_led: kp_led {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             wait-ms = <0>;
-            tap-ms = <50>; // LED 閃爍長度 50 毫秒
+            tap-ms = <50>;
             bindings
                 = <&bl BL_ON>
                 , <&macro_param_1to1>
@@ -51,18 +51,18 @@
         // Layer 0: Windows 模式 (預設)
         win_layer {
             bindings = <
-                &kp_led LC(C)    // D0: Ctrl + C (閃燈)
-                &kp_led LC(V)    // D1: Ctrl + V (閃燈)
-                &kp_led LA(TAB)  // D2: Alt + Tab (閃燈)
+                &kp_led LC(C)    // D0: Ctrl + C (按落閃紅燈)
+                &kp_led LC(V)    // D1: Ctrl + V (按落閃紅燈)
+                &kp_led LA(TAB)  // D2: Alt + Tab (按落閃紅燈)
             >;
         };
 
         // Layer 1: Mac 模式
         mac_layer {
             bindings = <
-                &kp_led LG(C)    // D0: Cmd + C (閃燈)
-                &kp_led LG(V)    // D1: Cmd + V (閃燈)
-                &kp_led LG(TAB)  // D2: Cmd + Tab (閃燈)
+                &kp_led LG(C)    // D0: Cmd + C (按落閃紅燈)
+                &kp_led LG(V)    // D1: Cmd + V (按落閃紅燈)
+                &kp_led LG(TAB)  // D2: Cmd + Tab (按落閃紅燈)
             >;
         };
     };
