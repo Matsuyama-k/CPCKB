@@ -7,10 +7,11 @@
         zmk,backlight = &backlight;
     };
 
-    // 綁定 Seeed XIAO 板上 P0.26 紅色 LED 腳位
     backlight: backlight {
-        compatible = "gpio-backlight";
-        gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+        compatible = "gpio-leds";
+        led_0 {
+            gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+        };
     };
 
     default_transform: keymap_transform_0 {
