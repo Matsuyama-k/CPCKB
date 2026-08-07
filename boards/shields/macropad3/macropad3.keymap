@@ -2,16 +2,67 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/backlight.h>
 
 / {
+    behaviors {
+        // 💡 靈魂巨集：按鍵時開燈 50ms 閃爍，然後關燈
+        kp_led: kp_led {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            wait-ms = <0>;
+            tap-ms = <50>; // LED 閃爍長度 50 毫秒
+            bindings
+                = <&bl BL_ON>
+                , <&macro_param_1to1>
+                , <&kp MACRO_PLACEHOLDER>
+                , <&bl BL_OFF>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        
+        // 🌟【秘技 1】：同時按 D0 + D1 -> 切換 Windows / Mac 模式
+        combo_tog_mac {
+            timeout-ms = <100>;
+            key-positions = <0 1>;
+            bindings = <&tog 1>;
+        };
+
+        // 🌟【備用秘技 2】：同時按 D1 + D2 -> 萬一換電腦，一秒【清空藍牙記憶】
+        combo_bt_clear {
+            timeout-ms = <100>;
+            key-positions = <1 2>;
+            bindings = <&bt BT_CLR_ALL>;
+        };
+
+        // 🌟【備用秘技 3】：同時按 D0 + D2 -> 強制切換【USB / 藍牙 模式】
+        combo_out_toggle {
+            timeout-ms = <100>;
+            key-positions = <0 2>;
+            bindings = <&out OUT_TOG>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        // Layer 0: Windows 模式 (預設)
+        win_layer {
             bindings = <
-                &bt BT_CLR_ALL  // D0 孔：單篤一下，即刻【徹底清空板上所有舊藍牙記憶】
-                &out OUT_TOG    // D1 孔：單篤一下，強制【切換 USB / 藍牙 輸出模式】
-                &kp N1          // D2 孔：單篤一下，打出 1 (測試連線)
+                &kp_led LC(C)    // D0: Ctrl + C (閃燈)
+                &kp_led LC(V)    // D1: Ctrl + V (閃燈)
+                &kp_led LA(TAB)  // D2: Alt + Tab (閃燈)
+            >;
+        };
+
+        // Layer 1: Mac 模式
+        mac_layer {
+            bindings = <
+                &kp_led LG(C)    // D0: Cmd + C (閃燈)
+                &kp_led LG(V)    // D1: Cmd + V (閃燈)
+                &kp_led LG(TAB)  // D2: Cmd + Tab (閃燈)
             >;
         };
     };
