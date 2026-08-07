@@ -7,15 +7,10 @@
         zmk,backlight = &backlight;
     };
 
-    // 💡 修正版：補上 led_0 子節點，解決 C 語言底層 DT_NUM_CHILD 算不到 LED 的問題
+    // 💡 Zephyr 標準 GPIO Backlight 節點定義
     backlight: backlight {
         compatible = "gpio-backlight";
-        label = "Backlight";
-
-        led_0 {
-            gpios = <&gpio0 26 GPIO_ACTIVE_LOW>; // 綁定 Seeed XIAO 板上的 P0.26 紅色 LED
-            label = "Red LED";
-        };
+        gpios = <&gpio0 26 GPIO_ACTIVE_LOW>; // 綁定 Seeed XIAO 板上的 P0.26 紅色 LED
     };
 
     default_transform: keymap_transform_0 {
