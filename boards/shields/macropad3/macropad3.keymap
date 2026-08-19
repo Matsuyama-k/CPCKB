@@ -6,7 +6,7 @@
 
 / {
     behaviors {
-        // 一般單鍵/組合鍵 (Ctrl+C, Ctrl+V) 用的閃燈巨集
+        // 一般按鍵閃燈巨集 (Ctrl+C, Ctrl+V, 截圖)
         kp_led: kp_led {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
@@ -19,12 +19,12 @@
                 , <&bl BL_OFF>;
         };
 
-        // 🌟【Windows 專用 Alt+Tab 巨集】：精準控制 Alt 按住 -> Tab 點擊 -> Alt 釋放 + 閃紅燈
+        // 🌟【方案 A：Windows 專用 Alt+Tab 巨集】加長延遲確保 Windows 切換成功
         alt_tab_win: alt_tab_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <30>;
+            wait-ms = <30>;
+            tap-ms = <50>;
             bindings
                 = <&bl BL_ON>
                 , <&macro_press &kp LALT>
@@ -37,8 +37,8 @@
         cmd_tab_mac: cmd_tab_mac {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <30>;
+            wait-ms = <30>;
+            tap-ms = <50>;
             bindings
                 = <&bl BL_ON>
                 , <&macro_press &kp LGUI>
@@ -58,18 +58,25 @@
             bindings = <&tog 1>;
         };
 
-        // D1 + D2 -> 萬一換電腦，一秒【清空藍牙記憶】
+        // D1 + D2 -> 清空藍牙配對記錄
         combo_bt_clear {
             timeout-ms = <100>;
             key-positions = <1 2>;
             bindings = <&bt BT_CLR_ALL>;
         };
 
-        // D0 + D2 -> 強制切換【USB / 藍牙 模式】
+        // D0 + D2 -> 強制切換 USB / 藍牙 模式
         combo_out_toggle {
             timeout-ms = <100>;
             key-positions = <0 2>;
             bindings = <&out OUT_TOG>;
+        };
+
+        // 🌟【免拆殼刷機】：同時按下 D0 + D1 + D2 -> 自動進入 Bootloader 刷機模式
+        combo_bootloader {
+            timeout-ms = <100>;
+            key-positions = <0 1 2>;
+            bindings = <&bootloader>;
         };
     };
 
@@ -79,18 +86,20 @@
         // Layer 0: Windows 模式 (預設)
         win_layer {
             bindings = <
-                &kp_led LC(C)    // D0: Ctrl + C
-                &kp_led LC(V)    // D1: Ctrl + V
-                &alt_tab_win     // D2: 專用 Alt + Tab (閃紅燈 + 切換視窗)
+                &kp_led LC(C)       // D0: 複製 (Ctrl + C)
+                &kp_led LC(V)       // D1: 貼上 (Ctrl + V)
+                &alt_tab_win        // D2: 切換視窗 (Alt + Tab 修正時序版)
+                &kp_led LG(LS(S))   // D3: Windows 區域截圖 (Win + Shift + S)
             >;
         };
 
         // Layer 1: Mac 模式
         mac_layer {
             bindings = <
-                &kp_led LG(C)    // D0: Cmd + C
-                &kp_led LG(V)    // D1: Cmd + V
-                &cmd_tab_mac     // D2: 專用 Cmd + Tab (閃紅燈 + 切換視窗)
+                &kp_led LG(C)       // D0: 複製 (Cmd + C)
+                &kp_led LG(V)       // D1: 貼上 (Cmd + V)
+                &cmd_tab_mac        // D2: 切換視窗 (Cmd + Tab)
+                &kp_led LG(LS(4))   // D3: Mac 區域截圖 (Cmd + Shift + 4)
             >;
         };
     };
