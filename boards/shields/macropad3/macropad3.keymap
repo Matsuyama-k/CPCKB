@@ -6,7 +6,7 @@
 
 / {
     behaviors {
-        // 一般按鍵閃燈巨集 (Ctrl+C, Ctrl+V, 截圖)
+        // 按鍵閃紅燈巨集 (按下亮燈 50ms 後熄滅並輸出按鍵)
         kp_led: kp_led {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
@@ -16,34 +16,6 @@
                 = <&bl BL_ON>
                 , <&macro_param_1to1>
                 , <&kp MACRO_PLACEHOLDER>
-                , <&bl BL_OFF>;
-        };
-
-        // 🌟【方案 A：Windows 專用 Alt+Tab 巨集】加長延遲確保 Windows 切換成功
-        alt_tab_win: alt_tab_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <30>;
-            tap-ms = <50>;
-            bindings
-                = <&bl BL_ON>
-                , <&macro_press &kp LALT>
-                , <&macro_tap &kp TAB>
-                , <&macro_release &kp LALT>
-                , <&bl BL_OFF>;
-        };
-
-        // 🌟【Mac 專用 Cmd+Tab 巨集】
-        cmd_tab_mac: cmd_tab_mac {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <30>;
-            tap-ms = <50>;
-            bindings
-                = <&bl BL_ON>
-                , <&macro_press &kp LGUI>
-                , <&macro_tap &kp TAB>
-                , <&macro_release &kp LGUI>
                 , <&bl BL_OFF>;
         };
     };
@@ -86,20 +58,20 @@
         // Layer 0: Windows 模式 (預設)
         win_layer {
             bindings = <
-                &kp_led LC(C)       // D0: 複製 (Ctrl + C)
-                &kp_led LC(V)       // D1: 貼上 (Ctrl + V)
-                &alt_tab_win        // D2: 切換視窗 (Alt + Tab 修正時序版)
-                &kp_led LG(LS(S))   // D3: Windows 區域截圖 (Win + Shift + S)
+                &kp_led LC(V)       // D0: 貼上 (Ctrl + V)
+                &kp_led LC(C)       // D1: 複製 (Ctrl + C)
+                &kp_led LG(LS(S))   // D2: Windows 區域截圖 (Win + Shift + S)
+                &kp_led ESC         // D3: ESC 鍵
             >;
         };
 
         // Layer 1: Mac 模式
         mac_layer {
             bindings = <
-                &kp_led LG(C)       // D0: 複製 (Cmd + C)
-                &kp_led LG(V)       // D1: 貼上 (Cmd + V)
-                &cmd_tab_mac        // D2: 切換視窗 (Cmd + Tab)
-                &kp_led LG(LS(4))   // D3: Mac 區域截圖 (Cmd + Shift + 4)
+                &kp_led LG(V)       // D0: 貼上 (Cmd + V)
+                &kp_led LG(C)       // D1: 複製 (Cmd + C)
+                &kp_led LG(LS(4))   // D2: Mac 區域截圖 (Cmd + Shift + 4)
+                &kp_led ESC         // D3: ESC 鍵
             >;
         };
     };
