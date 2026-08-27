@@ -26,10 +26,10 @@
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-direct";
         input-gpios
-            = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D0: Ctrl + C
-            , <&xiao_d 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D1: Ctrl + V
-            , <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D2: Alt + Tab
-            , <&xiao_d 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D3: 截圖鍵
+            = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D0: ESC 鍵
+            , <&xiao_d 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D1: 區域截圖
+            , <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D2: 複製
+            , <&xiao_d 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // D3: 貼上
             ;
     };
 };
