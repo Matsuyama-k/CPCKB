@@ -55,23 +55,23 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Windows 模式 (預設)
-        win_layer {
-            bindings = <
-                &kp_led ESC         // D0: ESC 鍵
-                &kp_led LG(LS(S))   // D1: Windows 區域截圖 (Win + Shift + S)
-                &kp_led LC(C)       // D2: 複製 (Ctrl + C)
-                &kp_led LC(V)       // D3: 貼上 (Ctrl + V)
-            >;
-        };
-
-        // Layer 1: Mac 模式
+        // Layer 0: Mac 模式 (預設)
         mac_layer {
             bindings = <
                 &kp_led ESC         // D0: ESC 鍵
                 &kp_led LG(LS(4))   // D1: Mac 區域截圖 (Cmd + Shift + 4)
                 &kp_led LG(C)       // D2: 複製 (Cmd + C)
                 &kp_led LG(V)       // D3: 貼上 (Cmd + V)
+            >;
+        };
+
+        // Layer 1: Windows 模式
+        win_layer {
+            bindings = <
+                &kp_led ESC         // D0: ESC 鍵
+                &kp_led LG(LS(S))   // D1: Windows 區域截圖 (Win + Shift + S)
+                &kp_led LC(C)       // D2: 複製 (Ctrl + C)
+                &kp_led LC(V)       // D3: 貼上 (Ctrl + V)
             >;
         };
     };
